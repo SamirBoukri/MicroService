@@ -23,7 +23,7 @@ app.get('/authors/:id', (req, res) => {
     if (author) {
         res.json(author);
     } else {
-        res.status(404).json({error: 'Auteur non trouvé'});
+        res.status(404).json({error});
     }
 })
 

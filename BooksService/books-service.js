@@ -24,8 +24,8 @@ app.get('/books/:id', async(req, res) => {
 
     if(book) {
         try {
-            const authorResponse = await axios.get(`http://localhost:4000/authors/${book.authorsId}`);
-            const categoryResponse = await axios.get(`http://localhost:5000/categories/${book.categoryId}`);
+            const authorResponse = await axios.get(`http://authors:4000/authors/${book.authorsId}`);
+            const categoryResponse = await axios.get(`http://categories:5000/categories/${book.categoryId}`);
             const author = authorResponse.data;
             const category = categoryResponse.data;
 
@@ -39,7 +39,7 @@ app.get('/books/:id', async(req, res) => {
             res.json(bookDetails);
 
         } catch (error) {
-            res.status(500).json({error: 'Erreur lors de la récupération des détails du livre'})
+            res.status(500).json({error})
         }
     } else {
         res.status(404).json({error: 'Livre non trouvé'});

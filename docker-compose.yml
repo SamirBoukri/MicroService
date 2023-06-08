@@ -1,0 +1,30 @@
+services:
+  authors:
+    build: ./AuthorsService
+    ports:
+      - 4000:4000
+    command: npm run start-authors
+    expose:
+      - "4000"
+    networks:
+      - my-network
+  books:
+    build: ./BooksService
+    ports:
+      - 3000:3000
+    command: npm run start-books
+    expose:
+      - "3000"
+    networks:
+      - my-network
+  categories:
+    build: ./CategoriesService
+    ports:
+      - 5000:5000
+    command: npm run start-categories
+    expose:
+      - "5000"
+    networks:
+      - my-network
+networks:
+  my-network:
