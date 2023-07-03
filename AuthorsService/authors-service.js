@@ -1,3 +1,4 @@
+const axios = require('axios');
 const express = require('express');
 const bodyParser = require('body-parser');
 
@@ -23,7 +24,32 @@ app.get('/authors/:id', (req, res) => {
     if (author) {
         res.json(author);
     } else {
-        res.status(404).json({error});
+        res.status(404).json({error : "not found"});
+    }
+})
+
+app.delete('/authors/:id', async (req, res) => {
+    const id = parseInt(req.params.id);
+    const index = authors.findIndex((author) => author.id === id);
+    if (index !== -1) {
+        authors.splice(index, 1);
+        const response = await axios.get(`http://books:3000/books`)
+        const books = response.data
+        console.log(books)
+        books.forEach(async (book) => {
+            if (book.authorsId == id) {
+                console.log("toto")
+                await axios.put(`http://books:3000/books/${book.id}`, {
+                    id: book.id,
+                    title: book.title,
+                    authorsId: null,
+                    categoryId: book.categoryId
+                })
+            }
+        });
+        res.json({ status: "succes" })
+    } else {
+        res.status(404).json({ error: "not found" })
     }
 })
 

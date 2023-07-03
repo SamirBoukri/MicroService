@@ -51,8 +51,8 @@ app.post('/books', (req, res) => {
     console.log(req.body)
     const newBook = {
         id: req.body.id,
-        tittle: req.body.tittle,
-        authorId: req.body.authorId,
+        title: req.body.title,
+        authorsId: req.body.authorsId,
         categoryId: req.body.categoryId
 
     }
@@ -68,8 +68,8 @@ app.put('/books/:id', async (req, res) => {
         try {
             const newBook = {
                 id: req.body.id,
-                tittle: req.body.tittle,
-                authorId: req.body.authorId,
+                title: req.body.title,
+                authorsId: req.body.authorsId,
                 categoryId: req.body.categoryId
 
             }
